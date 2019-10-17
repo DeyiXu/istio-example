@@ -2,6 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: client-gateway
+  namespace: istio-system
 spec:
   selector:
     istio: ingressgateway # use istio default controller
@@ -16,16 +17,16 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: client
+  name: client-route
+  namespace: example
 spec:
   hosts:
   - "*"
   gateways:
-  - client-gateway
+  - istio-system/client-gateway
   http:
   - match:
-    - uri:
-        exact: /ping
+    - port: 80
     route:
     - destination:
         host: client

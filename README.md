@@ -29,7 +29,7 @@ kubectl apply -n example -f https://raw.githubusercontent.com/DeyiXu/istio-examp
 kubectl delete -n example -f https://raw.githubusercontent.com/DeyiXu/istio-example/master/client/client.yaml
 
 # 在example命名空间中安装client-gateway
-kubectl apply -n example -f https://raw.githubusercontent.com/DeyiXu/istio-example/master/client/client-gateway.yaml
+kubectl apply -f https://raw.githubusercontent.com/DeyiXu/istio-example/master/client/client-gateway.yaml
 # 在example命名空间中删除client-gateway
-kubectl delete -n example -f https://raw.githubusercontent.com/DeyiXu/istio-example/master/client/client-gateway.yaml
+kubectl delete -f https://raw.githubusercontent.com/DeyiXu/istio-example/master/client/client-gateway.yaml
 ```

@@ -13,7 +13,7 @@ require (
 	github.com/mattn/go-isatty v0.0.10 // indirect
 	github.com/nilorg/istio v0.0.0-20191015121950-9897bbb794d6
 	github.com/nilorg/pkg v0.0.0-20190902102717-3ab6a9a1409c
-	github.com/ugorji/go/codec v1.1.7 // indirect
+	github.com/ugorji/go v1.1.7 // indirect
 	golang.org/x/sys v0.0.0-20191010194322-b09406accb47 // indirect
 	google.golang.org/genproto v0.0.0-20191009194640-548a555dbc03 // indirect
 	gopkg.in/yaml.v2 v2.2.4 // indirect
