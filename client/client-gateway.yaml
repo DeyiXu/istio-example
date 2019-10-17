@@ -23,6 +23,9 @@ spec:
   gateways:
   - client-gateway
   http:
+  - match:
+    - uri:
+        exact: /ping
     route:
     - destination:
         host: client
