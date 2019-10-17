@@ -5,7 +5,7 @@ go/golang istio example
 # 创建`example`命名空间
 kubectl create namespace example
 # 删除`example`命名空间
-
+kubectl delete namespace example
 # 获取所有命名空间
 kubectl get namespace
 
@@ -22,4 +22,14 @@ kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboar
 kubectl apply -n example -f https://raw.githubusercontent.com/DeyiXu/istio-example/master/server/server.yaml
 # 在example命名空间中删除server
 kubectl delete -n example -f https://raw.githubusercontent.com/DeyiXu/istio-example/master/server/server.yaml
+
+# 在example命名空间中安装client
+kubectl apply -n example -f https://raw.githubusercontent.com/DeyiXu/istio-example/master/client/client.yaml
+# 在example命名空间中删除client
+kubectl delete -n example -f https://raw.githubusercontent.com/DeyiXu/istio-example/master/client/client.yaml
+
+# 在example命名空间中安装client-gateway
+kubectl apply -n example -f https://raw.githubusercontent.com/DeyiXu/istio-example/master/client/client-gateway.yaml
+# 在example命名空间中删除client-gateway
+kubectl delete -n example -f https://raw.githubusercontent.com/DeyiXu/istio-example/master/client/client-gateway.yaml
 ```

@@ -1,0 +1,16 @@
+FROM golang:1.13.1-alpine as builder
+LABEL maintainer="862860000@qq.com"
+
+RUN apk update && apk add git
+RUN go env -w GOPROXY=https://goproxy.io,direct
+
+WORKDIR /src
+COPY . .
+
+RUN go build ./client/cmd/main.go
+
+FROM alpine:latest
+WORKDIR /app
+COPY --from=builder /src/main .
+EXPOSE 8080
+CMD ["./main"]

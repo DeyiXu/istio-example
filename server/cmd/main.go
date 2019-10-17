@@ -16,7 +16,7 @@ func init() {
 }
 
 func main() {
-	grpcServer := istio.NewGrpcServer("helloword", ":9000")
+	grpcServer := istio.NewGrpcServer("server", ":9000")
 
 	grpcServer.Start()
 	pb.RegisterGreeterServer(grpcServer.GetSrv(), &server.Server{})

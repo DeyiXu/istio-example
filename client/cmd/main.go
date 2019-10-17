@@ -2,10 +2,8 @@ package main
 
 import (
 	"context"
-	"os"
-	"os/signal"
-	"time"
 
+	"github.com/gin-gonic/gin"
 	"github.com/nilorg/pkg/logger"
 
 	pb "github.com/DeyiXu/istio-example/proto/helloworld"
@@ -16,24 +14,24 @@ func init() {
 	logger.Init()
 }
 func main() {
-	client := istio.NewGrpcClient("127.0.0.1", 9000)
+	client := istio.NewGrpcClient("server", 9000)
 	greeterClient := pb.NewGreeterClient(client.GetConn())
 
-	go func() {
-		for {
-			time.Sleep(time.Second)
-			r, err := greeterClient.SayHello(context.Background(), &pb.HelloRequest{Name: "xudeyi"})
-			if err != nil {
-				logger.Infof("could not greet: %v", err)
-				continue
-			}
-			logger.Infof("Greeting: %s", r.Message)
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		r, err := greeterClient.SayHello(context.Background(), &pb.HelloRequest{Name: "xudeyi"})
+		if err != nil {
+			logger.Infof("could not greet: %v", err)
+			c.JSON(400, gin.H{
+				"message": err.Error(),
+			})
+			return
 		}
-	}()
-
-	// 等待中断信号优雅地关闭服务器
-	quit := make(chan os.Signal)
-	signal.Notify(quit, os.Interrupt)
-	<-quit
+		logger.Infof("Greeting: %s", r.Message)
+		c.JSON(200, gin.H{
+			"message": r.Message,
+		})
+	})
+	r.Run() // listen and serve on 0.0.0.0:8080
 	defer client.Close()
 }

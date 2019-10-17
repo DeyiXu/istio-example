@@ -1,0 +1,42 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: client
+  labels:
+    app: client
+spec:
+  selector:
+    app: client
+  ports:
+    - name: http
+      port: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-v1
+spec:
+  selector:
+    matchLabels:
+      app: client
+      version: v1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: client
+        version: v1
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: server
+          image: registry.cn-qingdao.aliyuncs.com/istio-example/grpc-client:v1
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
