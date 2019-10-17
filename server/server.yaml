@@ -1,12 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: grpc-server
+  name: server
   labels:
-    app: grpc-server
+    app: server
 spec:
   selector:
-    app: grpc-server
+    app: server
   ports:
     - name: grpc
       port: 999
@@ -14,22 +14,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grpc-server-v1
+  name: server-v1
 spec:
   selector:
     matchLabels:
-      app: grpc-server
+      app: server
       version: v1
   replicas: 3
   template:
     metadata:
       labels:
-        app: grpc-server
+        app: server
         version: v1
     spec:
       restartPolicy: Always
       containers:
-        - name: grpc-server
+        - name: server
           image: registry.cn-qingdao.aliyuncs.com/istio-example/grpc-server:v1
           ports:
             - containerPort: 999
