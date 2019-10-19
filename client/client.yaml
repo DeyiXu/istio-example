@@ -14,7 +14,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-v1
+  name: client
 spec:
   selector:
     matchLabels:
