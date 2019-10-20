@@ -18,6 +18,12 @@ kubectl label namespace example istio-injection=enabled
 # 获取 kubernetes-dashboard token
 kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
 
+# Istio
+```bash
+kubectl get svc -n istio-system
+kubectl get pods -n istio-system
+```
+
 # 在example命名空间中安装server
 kubectl apply -n example -f https://raw.githubusercontent.com/DeyiXu/istio-example/master/server/server.yaml
 # 在example命名空间中删除server

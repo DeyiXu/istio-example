@@ -9,7 +9,7 @@ spec:
     app: server
   ports:
     - name: grpc
-      port: 999
+      port: 9000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -32,11 +32,4 @@ spec:
         - name: server
           image: registry.cn-qingdao.aliyuncs.com/istio-example/grpc-server:v1
           ports:
-            - containerPort: 999
-          resources:
-            requests:
-              cpu: 50m
-              memory: 50Mi
-            limits:
-              cpu: 100m
-              memory: 100Mi
+            - containerPort: 9000
